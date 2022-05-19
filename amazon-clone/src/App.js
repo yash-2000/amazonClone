@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
-
+import Header from "./Header";
+import Home from "./Home";
 function App() {
   return (
     <div className="App">
-      <h1>helloo yash</h1>
-      <h2> dbsfb</h2>
-      <h4>rgrg</h4>
+      <Header />
+      <Home/>
     </div>
   );
 }
