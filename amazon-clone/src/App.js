@@ -4,7 +4,7 @@ import Header from "./Header";
 import Home from "./Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Checkout from "./Checkout";
-import Login from "./Login"
+import Login from "./Login.js"
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       
         <Routes>
           <Route
-            parh="/login"
+            path="/login"
             element={
               <>
                 <Login />
