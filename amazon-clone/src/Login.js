@@ -1,8 +1,36 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
+import { auth } from "./firebase"
+
 function Login() {
+    const navigate= useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const signIn = e =>{
+        e.preventDefault();
+        auth.createUserWithEmailAndPassword(email, password)
+        .then(auth => {
+            navigate('/')
+        })
+        .catch(error=> alert(error.message))
+    }
+
+    const register = e =>{
+      e.preventDefault();
+
+      auth.createUserWithEmailAndPassword(email, password)
+      .then((auth)=>{
+        if (auth){
+          navigate('/')
+        }
+      })
+      .catch(error=> alert(error.message))
+    }
+
+
   return (
     <div className="login">
     <Link to="/">
@@ -15,16 +43,20 @@ function Login() {
 
         <form>
             <h5>E-mail</h5>
-            <input type="text"/>
+
+            <input type="text" value={email} onChange= {e => setEmail(e.target.value)} />
             <h5>Password</h5>
-            <input type="text"/>
-            <button className="login-signinButton">Sign In</button>
+            <input type="text" value={password} onChange= {e => setPassword(e.target.value)}/>
+            
+            <button type='submit' onClick={signIn} 
+            className="login-signinButton">Sign In</button>
         </form>
         <p>
             New to Amazon?
         </p>
        
-       <button className="login-reg-button">Create your Amazon Account</button>
+       <button  onClick={register}
+       className="login-reg-button">Create your Amazon Account</button>
     </div>
     </div>
   );
